@@ -1,0 +1,236 @@
+<html ng-app="FlashCardsApp">
+
+<head>
+    <title>Flash Cards</title>
+    <!--<link rel="stylesheet" href="Assets/jquery.mobile-1.0.min.css" />
+    <script src="Assets/jquery.js"></script>
+    <script type="text/javascript" src="Assets/jquery.mobile-1.0.min.js"></script>-->
+
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"></script>-->
+    <script src="Assets/fastclick.js"></script>
+    <script src="Assets/FlashCardsController.js"></script>
+    <script src="Assets/common.js"></script>
+    <script src="Assets/ProblemSets.js"></script>
+
+    <meta name="viewport" content="width=device-width" />
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-2315326-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script>
+        var hTimeout;
+        var aFinal;
+        var iCorrectAnswers;
+        var bSumsOfTen = false;
+        var bDoubles = false;
+        var bTest6 = false;
+        var bTest9 = true;
+        var bTest10 = false;
+        var bShuffle = false;
+        var bTimer = false;
+        var iTimer = 60;
+
+        var a0 = [0];
+        var aIntegers19 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        var aSumsOf10 = new Array();
+        for (var i = 1; i <= 9; i++) {
+            aSumsOf10.push([i, 10 - i]);
+        }
+
+        var aDoubles = new Array();
+        for (var i = 1; i <= 9; i++) {
+            aDoubles.push([i, i]);
+        }
+
+        $(function () {
+            FastClick.attach(document.body); // fix the 300ms delay
+            $('#btnMainMenu').click(function () {
+                clearTimeout(hTimeout);
+            })
+            Init_Game();
+            LoadOptions();
+        });
+
+        function Init_Game() {
+            // reset counters
+            iCorrectAnswers = -1;
+            iListCounter = 0;
+
+            // build list of problems
+            aFinal = FLASHCARDSAPP.BuildProblemArray();
+
+            // show/hide the correct elements
+            $('.gameStartCtl').show();
+            $('.gameRunCtl').hide();
+
+            $('#TopAddend').text("");
+			$('#BottomAddend').text("");
+			$('#OperationSymbol').text("");
+
+			// setup the function that continues the game
+			$('#btnStart').click(function () {
+                StartGame();
+            });
+        }
+
+        function StartGame() {
+            // show/hide the correct elements
+            $('.gameStartCtl').hide();
+            $('.gameRunCtl').show();
+
+            // setup the function that continues the game
+            $('#SummationSet').unbind('click').click(function () {
+                DisplayNextProblem();
+            });
+
+            //StartTimer();
+            DisplayNextProblem();
+        }
+
+        function DisplayNextProblem() {
+            var p = FLASHCARDSAPP.GetNextSet(aFinal, bShuffle);
+            $('#TopAddend').text(p[0]);
+            $('#BottomAddend').text(Math.abs(p[1]));
+            if (1/p[1]>0) // 1/val > 0 is +infinity for val>=0 and -infinity for val<=(-0)
+                $('#OperationSymbol').text('+');
+            else
+                $('#OperationSymbol').text('-');
+            $('#SetCounter').text(FLASHCARDSAPP.iCurrentIndex+1 + '/' + aFinal.length);
+        }
+
+        function StartTimer() {
+            if (bTimer)
+                hTimeout = setTimeout(function () {
+                    $.mobile.navigate("#results", { info: "info about the #bar hash" });
+                    $('#ResultMsg').text("You named " + iCorrectAnswers + " letters in " + iTimer + " seconds!");
+                },
+                iTimer * 1000);
+        }
+
+        function LoadOptions() {
+            $('#ckSumsOfTen').prop("checked", bSumsOfTen);
+            $('#ckSumsOfTen').click(function () {
+                $("#ckSumsOfTen").toggle(this.checked);
+                bSumsOfTen = this.checked;
+            });
+
+            $('#ckDoubles').prop("checked", bDoubles);
+            $('#ckDoubles').click(function () {
+                $("#ckDoubles").toggle(this.checked);
+                bDoubles = this.checked;
+            });
+
+            $('#ckTest6').prop("checked", bTest6);
+            $('#ckTest6').click(function () {
+                $("#ckTest6").toggle(this.checked);
+                bTest6 = this.checked;
+            });
+
+            $('#ckTest9').prop("checked", bTest9);
+            $('#ckTest9').click(function () {
+                $("#ckTest9").toggle(this.checked);
+                bTest9 = this.checked;
+            });
+
+            $('#ckTest10').prop("checked", bTest10);
+            $('#ckTest10').click(function () {
+                $("#ckTest10").toggle(this.checked);
+                bTest10 = this.checked;
+            });
+
+            $('#ckShuffle').prop("checked", bShuffle);
+            $('#ckShuffle').click(function () {
+                $("#ckShuffle").toggle(this.checked);
+                bShuffle = this.checked;
+            });
+
+            $('#ckTimer').prop("checked", bTimer);
+            $('#ckTimer').click(function () {
+                $("#ckTimer").toggle(this.checked);
+                bTimer = this.checked;
+            });
+            $('#txtTimer').val(iTimer);
+            $("#txtTimer").change(function () { iTimer = $('#txtTimer').val() });
+        }
+    </script>
+
+</head>
+<body style="background-color:#000000;">
+
+    <div data-role="page" id="game" data-theme="a">
+        <noscript><div class="ui-content ui-body-a"><p>This site requires JavaScript. You must enable JavaScript to load functionality.</p></div></noscript>
+        <div data-role="header">
+            <h1>Flash Cards</h1><a href="">Menu</a><a href="#options">options</a>
+        </div>
+        <div data-role="ui-content" data-theme="a">
+            <div data-role="controlgroup">
+                <div id="btnStart" class="gameStartCtl" style="text-align: center; font-size: 10vw; margin-bottom: 8px; margin:3px; height:80vh; vertical-align:middle;">
+                    Tap to Start
+                </div>
+                <div id="SummationSet" class="gameRunCtl" style="text-align: right; font-family: 'Noto Sans', sans-serif; font-size: 45vh; margin-bottom: 8px; margin-right:3px;">
+                    <span id="TopAddend" style="line-height:0.75;">&nbsp;</span><br />
+                    <span id="OperationSymbol"></span><span id="BottomAddend" style="line-height:0.75;">&nbsp;</span>
+                </div>
+                <div id="SetCounter" class="gameRunCtl" style="position:absolute; float:left; bottom:10vh; left:0; opacity:0.2;">
+                    0/um
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="options" data-theme="a">
+        <div data-role="header">
+            <h1>Options</h1><a href="#game" data-direction="reverse" onclick="Init_Game();">Play Again</a>
+        </div><!-- /header -->
+
+        <!--<div role="main" class="ui-content" ng-controller="ProblemSetCtrl">-->
+        <div role="main" class="ui-content">
+            <fieldset data-role="controlgroup">
+                <legend>Problem Sets</legend>
+                <!-- loop start -->
+                <!-- <label ng-repeat-start="s in ProblemSets" for="ck{{s.shortname}}">{{s.displayname}}</label><input ng-repeat-end type="checkbox" id="ck{{s.shortname}}" /> -->
+                <!-- loop end -->
+                <label for="ckSumsOfTen">Sums of 10</label><input type="checkbox" id="ckSumsOfTen" />
+                <label for="ckDoubles">Doubles 0-9</label><input type="checkbox" id="ckDoubles" />
+                <label for="ckTest6">Test #6</label><input type="checkbox" id="ckTest6" />
+                <label for="ckTest9">Test #9</label><input type="checkbox" id="ckTest9" />
+                <label for="ckTest10">Test #10</label><input type="checkbox" id="ckTest10" />
+            </fieldset>
+            <fieldset data-role="controlgroup">
+                <legend>Options</legend>
+                <label for="ckShuffle">Shuffle</label><input type="checkbox" id="ckShuffle" />
+                <label for="ckTimer">Timer (in seconds)</label><input type="checkbox" id="ckTimer" /> <input type="text" id="txtTimer" />
+            </fieldset>
+        </div><!-- /content -->
+        <div data-role="footer">
+            <p>&copy; 2016 Knapp Technologies</p>
+        </div><!-- /footer -->
+    </div><!-- /page -->
+
+    <div data-role="page" id="results" data-theme="a">
+        <div data-role="header">
+            <h1>Great Job!</h1><a href="#game" data-direction="reverse" onclick="Init_Game();">Play Again</a><a href="#options">options</a>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+            <div style="text-align:center;">
+                <h3>Great job! <div style="display:block;" id="ResultMsg">You Named a lot of Letters!</div></h3>
+            </div>
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+</body>
+</html>
