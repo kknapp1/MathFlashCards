@@ -36,6 +36,8 @@
         var bSumsOf10Subtract = false;
         var bMultiply1 = true;
         var bMultiply2 = true;
+        var bMultiply3 = true;
+        var bMultiply4 = true;
         var bDoubles = false;
         var bTest6 = false;
         var bTest9 = false;
@@ -140,6 +142,18 @@
             $('#ckMultiply2').click(function () {
                 $("#ckMultiply2").toggle(this.checked);
                 bMultiply2 = this.checked;
+            });                 
+            
+            $('#ckMultiply3').prop("checked", bMultiply3);
+            $('#ckMultiply3').click(function () {
+                $("#ckMultiply3").toggle(this.checked);
+                bMultiply3 = this.checked;
+            });           
+            
+            $('#ckMultiply4').prop("checked", bMultiply4);
+            $('#ckMultiply4').click(function () {
+                $("#ckMultiply4").toggle(this.checked);
+                bMultiply4 = this.checked;
             });           
             
             $('#ckDoubles').prop("checked", bDoubles);
@@ -223,6 +237,8 @@
                 <label for="ckDoubles">Doubles 0-9</label><input type="checkbox" id="ckDoubles" />
                 <label for="ckMultiply1">Multiply by 1</label><input type="checkbox" id="ckMultiply1" />
                 <label for="ckMultiply2">Multiply by 2</label><input type="checkbox" id="ckMultiply2" />
+                <label for="ckMultiply3">Multiply by 3</label><input type="checkbox" id="ckMultiply3" />
+                <label for="ckMultiply4">Multiply by 4</label><input type="checkbox" id="ckMultiply4" />
                 <!-- <label for="ckTest6">Test #6</label><input type="checkbox" id="ckTest6" />
                 <label for="ckTest9">Test #9</label><input type="checkbox" id="ckTest9" />
                 <label for="ckTest10">Test #10</label><input type="checkbox" id="ckTest10" /> -->
