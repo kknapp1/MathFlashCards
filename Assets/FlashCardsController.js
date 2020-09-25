@@ -5,6 +5,12 @@ var FLASHCARDSAPP = {
         var retval = new Array();
         if (bSumsOfTen)
             $.merge(retval, aSumsOf10);
+        if (bSumsOf10Subtract)
+            $.merge(retval, aSumsOf10Subtract);            
+        if (bMultiply1)
+            $.merge(retval, aMultiply1);  
+        if (bMultiply2)
+            $.merge(retval, aMultiply2);  
         if (bDoubles)
             $.merge(retval, aDoubles);
         if (bTest6)

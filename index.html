@@ -33,9 +33,12 @@
         var aFinal;
         var iCorrectAnswers;
         var bSumsOfTen = false;
+        var bSumsOf10Subtract = false;
+        var bMultiply1 = true;
+        var bMultiply2 = true;
         var bDoubles = false;
         var bTest6 = false;
-        var bTest9 = true;
+        var bTest9 = false;
         var bTest10 = false;
         var bShuffle = false;
         var bTimer = false;
@@ -43,16 +46,6 @@
 
         var a0 = [0];
         var aIntegers19 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-        var aSumsOf10 = new Array();
-        for (var i = 1; i <= 9; i++) {
-            aSumsOf10.push([i, 10 - i]);
-        }
-
-        var aDoubles = new Array();
-        for (var i = 1; i <= 9; i++) {
-            aDoubles.push([i, i]);
-        }
 
         $(function () {
             FastClick.attach(document.body); // fix the 300ms delay
@@ -102,11 +95,16 @@
         function DisplayNextProblem() {
             var p = FLASHCARDSAPP.GetNextSet(aFinal, bShuffle);
             $('#TopAddend').text(p[0]);
-            $('#BottomAddend').text(Math.abs(p[1]));
-            if (1/p[1]>0) // 1/val > 0 is +infinity for val>=0 and -infinity for val<=(-0)
-                $('#OperationSymbol').text('+');
-            else
-                $('#OperationSymbol').text('-');
+
+            if (isNaN(p[1]))
+                $('#BottomAddend').text(p[1]); //if it's NaN then just display the string
+            else{
+                $('#BottomAddend').text(Math.abs(p[1]));
+                if (1/p[1]>0) // 1/val > 0 is +infinity for val>=0 and -infinity for val<=(-0)
+                    $('#OperationSymbol').text('+');
+                else
+                    $('#OperationSymbol').text('-');
+            }
             $('#SetCounter').text(FLASHCARDSAPP.iCurrentIndex+1 + '/' + aFinal.length);
         }
 
@@ -126,6 +124,24 @@
                 bSumsOfTen = this.checked;
             });
 
+            $('#ckSumsOf10Subtract').prop("checked", bSumsOf10Subtract);
+            $('#ckSumsOf10Subtract').click(function () {
+                $("#ckSumsOf10Subtract").toggle(this.checked);
+                bSumsOf10Subtract = this.checked;
+            });            
+
+            $('#ckMultiply1').prop("checked", bMultiply1);
+            $('#ckMultiply1').click(function () {
+                $("#ckMultiply1").toggle(this.checked);
+                bMultiply1 = this.checked;
+            });            
+
+            $('#ckMultiply2').prop("checked", bMultiply2);
+            $('#ckMultiply2').click(function () {
+                $("#ckMultiply2").toggle(this.checked);
+                bMultiply2 = this.checked;
+            });           
+            
             $('#ckDoubles').prop("checked", bDoubles);
             $('#ckDoubles').click(function () {
                 $("#ckDoubles").toggle(this.checked);
@@ -172,7 +188,7 @@
     <div data-role="page" id="game" data-theme="a">
         <noscript><div class="ui-content ui-body-a"><p>This site requires JavaScript. You must enable JavaScript to load functionality.</p></div></noscript>
         <div data-role="header">
-            <h1>Flash Cards</h1><a href="">Menu</a><a href="#options">options</a>
+            <h1>Flash Cards</h1><!--<a href="">Menu</a>--><a href="#options">options</a>
         </div>
         <div data-role="ui-content" data-theme="a">
             <div data-role="controlgroup">
@@ -203,10 +219,13 @@
                 <!-- <label ng-repeat-start="s in ProblemSets" for="ck{{s.shortname}}">{{s.displayname}}</label><input ng-repeat-end type="checkbox" id="ck{{s.shortname}}" /> -->
                 <!-- loop end -->
                 <label for="ckSumsOfTen">Sums of 10</label><input type="checkbox" id="ckSumsOfTen" />
+                <label for="ckSumsOf10Subtract">Subtract Sums of 10</label><input type="checkbox" id="ckSumsOf10Subtract" />
                 <label for="ckDoubles">Doubles 0-9</label><input type="checkbox" id="ckDoubles" />
-                <label for="ckTest6">Test #6</label><input type="checkbox" id="ckTest6" />
+                <label for="ckMultiply1">Multiply by 1</label><input type="checkbox" id="ckMultiply1" />
+                <label for="ckMultiply2">Multiply by 2</label><input type="checkbox" id="ckMultiply2" />
+                <!-- <label for="ckTest6">Test #6</label><input type="checkbox" id="ckTest6" />
                 <label for="ckTest9">Test #9</label><input type="checkbox" id="ckTest9" />
-                <label for="ckTest10">Test #10</label><input type="checkbox" id="ckTest10" />
+                <label for="ckTest10">Test #10</label><input type="checkbox" id="ckTest10" /> -->
             </fieldset>
             <fieldset data-role="controlgroup">
                 <legend>Options</legend>
