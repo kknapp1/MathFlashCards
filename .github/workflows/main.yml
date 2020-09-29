@@ -26,30 +26,30 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-     - name: Simple FTP deploy
-  # You may pin to the exact commit or the version.
-  # uses: kevinpainchaud/simple-ftp-deploy-action@24236ab095cca6ee941ecb14634e3cdba47b1ef4
-  uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.0
-  with:
-    # FTP host
-    ftp_host: 
-    # FTP username
-    ftp_username: 
-    # FTP password
-    ftp_password: 
-    # The local folder to copy
-    local_source_dir: 
-    # The remote folder
-    dist_target_dir: 
-    # Delete files not present in the local folder on the remote folder
-    delete: # optional, default is false
-    # Download only newer files
-    only_newer: # optional, default is false
-    # Ignore time when deciding whether to download
-    ignore_time: # optional, default is false
-    # Ignore file(s) and/or directorie(s)
-    exclude: # optional, default is 
-    # Disable SSL certificate verification
-    disable_ssl_certificate_verification: # optional, default is true
-    # Optional raw string of flags for lftp eg. --no-empty-dirs
-    other_flags: # optional, default is 
+      - name: Simple FTP deploy
+        # You may pin to the exact commit or the version.
+        # uses: kevinpainchaud/simple-ftp-deploy-action@24236ab095cca6ee941ecb14634e3cdba47b1ef4
+        uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.0
+        with:
+          # FTP host
+          ftp_host: ftp.knapptech.com
+          # FTP username
+          ftp_username: ${{secret.KNAPPTECH_FTP_USER}}
+          # FTP password
+          ftp_password: ${{secret.KNAPPTECH_FTP_PASS}}
+          # The local folder to copy
+          local_source_dir: src
+          # The remote folder
+          dist_target_dir: FlashCards
+          # Delete files not present in the local folder on the remote folder
+          delete: # optional, default is false
+          # Download only newer files
+          only_newer: # optional, default is false
+          # Ignore time when deciding whether to download
+          ignore_time: # optional, default is false
+          # Ignore file(s) and/or directorie(s)
+          exclude: # optional, default is 
+          # Disable SSL certificate verification
+          disable_ssl_certificate_verification: # optional, default is true
+          # Optional raw string of flags for lftp eg. --no-empty-dirs
+          other_flags: # optional, default is 
