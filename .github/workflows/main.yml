@@ -34,15 +34,15 @@ jobs:
           # FTP username
           ftp_username: ${{secrets.KNAPPTECH_FTP_USER}}
           # FTP password
-          ftp_password: 1234
+          ftp_password: ${{secrets.KNAPPTECH_FTP_PASS}}
           # The local folder to copy
           local_source_dir: src
           # The remote folder
           dist_target_dir: FlashCards
           # Delete files not present in the local folder on the remote folder
-          delete: # optional, default is false
+          delete: false # optional, default is false
           # Download only newer files
-          only_newer: # optional, default is false
+          only_newer: false # optional, default is false
           # Ignore time when deciding whether to download
           ignore_time: # optional, default is false
           # Ignore file(s) and/or directorie(s)
