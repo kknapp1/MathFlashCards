@@ -38,6 +38,12 @@
         var bMultiply2 = true;
         var bMultiply3 = true;
         var bMultiply4 = true;
+        var bMultiply5 = true;
+        var bMultiply6 = true;
+        var bMultiply7 = true;
+        var bMultiply8 = true;
+        var bMultiply9 = true;
+        var bMultiply10 = true;
         var bDoubles = false;
         var bTest6 = false;
         var bTest9 = false;
@@ -156,6 +162,42 @@
                 bMultiply4 = this.checked;
             });           
             
+            $('#ckMultiply5').prop("checked", bMultiply5);
+            $('#ckMultiply5').click(function () {
+                $("#ckMultiply5").toggle(this.checked);
+                bMultiply5 = this.checked;
+            });           
+            
+            $('#ckMultiply6').prop("checked", bMultiply6);
+            $('#ckMultiply6').click(function () {
+                $("#ckMultiply6").toggle(this.checked);
+                bMultiply6 = this.checked;
+            });           
+            
+            $('#ckMultiply7').prop("checked", bMultiply7);
+            $('#ckMultiply7').click(function () {
+                $("#ckMultiply7").toggle(this.checked);
+                bMultiply7 = this.checked;
+            });           
+            
+            $('#ckMultiply8').prop("checked", bMultiply8);
+            $('#ckMultiply8').click(function () {
+                $("#ckMultiply8").toggle(this.checked);
+                bMultiply8 = this.checked;
+            });           
+            
+            $('#ckMultiply9').prop("checked", bMultiply9);
+            $('#ckMultiply9').click(function () {
+                $("#ckMultiply9").toggle(this.checked);
+                bMultiply9 = this.checked;
+            });           
+            
+            $('#ckMultiply10').prop("checked", bMultiply10);
+            $('#ckMultiply10').click(function () {
+                $("#ckMultiply10").toggle(this.checked);
+                bMultiply10 = this.checked;
+            });           
+            
             $('#ckDoubles').prop("checked", bDoubles);
             $('#ckDoubles').click(function () {
                 $("#ckDoubles").toggle(this.checked);
@@ -239,6 +281,12 @@
                 <label for="ckMultiply2">Multiply by 2</label><input type="checkbox" id="ckMultiply2" />
                 <label for="ckMultiply3">Multiply by 3</label><input type="checkbox" id="ckMultiply3" />
                 <label for="ckMultiply4">Multiply by 4</label><input type="checkbox" id="ckMultiply4" />
+                <label for="ckMultiply5">Multiply by 5</label><input type="checkbox" id="ckMultiply5" />
+                <label for="ckMultiply6">Multiply by 6</label><input type="checkbox" id="ckMultiply6" />
+                <label for="ckMultiply7">Multiply by 7</label><input type="checkbox" id="ckMultiply7" />
+                <label for="ckMultiply8">Multiply by 8</label><input type="checkbox" id="ckMultiply8" />
+                <label for="ckMultiply9">Multiply by 9</label><input type="checkbox" id="ckMultiply9" />
+                <label for="ckMultiply10">Multiply by 10</label><input type="checkbox" id="ckMultiply10" />
                 <!-- <label for="ckTest6">Test #6</label><input type="checkbox" id="ckTest6" />
                 <label for="ckTest9">Test #9</label><input type="checkbox" id="ckTest9" />
                 <label for="ckTest10">Test #10</label><input type="checkbox" id="ckTest10" /> -->
@@ -250,7 +298,7 @@
             </fieldset>
         </div><!-- /content -->
         <div data-role="footer">
-            <p>&copy; 2016 Knapp Technologies</p>
+            <p>&copy; 2016-2021 Knapp Technologies</p>
         </div><!-- /footer -->
     </div><!-- /page -->
 

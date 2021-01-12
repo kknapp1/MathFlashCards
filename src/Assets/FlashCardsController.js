@@ -15,6 +15,18 @@ var FLASHCARDSAPP = {
             $.merge(retval, aMultiply3);  
         if (bMultiply4)
             $.merge(retval, aMultiply4);  
+        if (aMultiply5)
+            $.merge(retval, aMultiply5);  
+        if (aMultiply6)
+            $.merge(retval, aMultiply6);  
+        if (aMultiply7)
+            $.merge(retval, aMultiply7);  
+        if (aMultiply8)
+            $.merge(retval, aMultiply8);  
+        if (aMultiply9)
+            $.merge(retval, aMultiply9);  
+        if (aMultiply10)
+            $.merge(retval, aMultiply10);  
         if (bDoubles)
             $.merge(retval, aDoubles);
         if (bTest6)
