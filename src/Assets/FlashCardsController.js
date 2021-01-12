@@ -15,18 +15,22 @@ var FLASHCARDSAPP = {
             $.merge(retval, aMultiply3);  
         if (bMultiply4)
             $.merge(retval, aMultiply4);  
-        if (aMultiply5)
+        if (bMultiply5)
             $.merge(retval, aMultiply5);  
-        if (aMultiply6)
+        if (bMultiply6)
             $.merge(retval, aMultiply6);  
-        if (aMultiply7)
+        if (bMultiply7)
             $.merge(retval, aMultiply7);  
-        if (aMultiply8)
+        if (bMultiply8)
             $.merge(retval, aMultiply8);  
-        if (aMultiply9)
+        if (bMultiply9)
             $.merge(retval, aMultiply9);  
-        if (aMultiply10)
+        if (bMultiply10)
             $.merge(retval, aMultiply10);  
+        if (bMultiply11)
+            $.merge(retval, aMultiply11);
+        if (bMultiply12)
+            $.merge(retval, aMultiply12);
         if (bDoubles)
             $.merge(retval, aDoubles);
         if (bTest6)
@@ -35,6 +39,7 @@ var FLASHCARDSAPP = {
             $.merge(retval, aTest9);
         if (bTest10)
             $.merge(retval, aTest10);
+
 
         /* $.each(aProblemSets, function (index, item) {
             $.merge(retval, item.data);
