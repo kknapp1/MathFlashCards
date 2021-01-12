@@ -44,6 +44,8 @@
         var bMultiply8 = true;
         var bMultiply9 = true;
         var bMultiply10 = true;
+        var bMultiply11 = true;
+        var bMultiply12 = true;
         var bDoubles = false;
         var bTest6 = false;
         var bTest9 = false;
@@ -112,6 +114,9 @@
                     $('#OperationSymbol').text('+');
                 else
                     $('#OperationSymbol').text('-');
+
+                // JUST FORCE MULTIPLICATION FOR NOW!
+                $('#OperationSymbol').text('x');
             }
             $('#SetCounter').text(FLASHCARDSAPP.iCurrentIndex+1 + '/' + aFinal.length);
         }
@@ -198,7 +203,19 @@
             $('#ckMultiply10').click(function () {
                 $("#ckMultiply10").toggle(this.checked);
                 bMultiply10 = this.checked;
-            });           
+            });  
+            
+            $('#ckMultiply11').prop("checked", bMultiply11);
+            $('#ckMultiply11').click(function () {
+                $("#ckMultiply11").toggle(this.checked);
+                bMultiply11 = this.checked;
+            });  
+            
+            $('#ckMultiply12').prop("checked", bMultiply12);
+            $('#ckMultiply12').click(function () {
+                $("#ckMultiply12").toggle(this.checked);
+                bMultiply12 = this.checked;
+            });  
             
             $('#ckDoubles').prop("checked", bDoubles);
             $('#ckDoubles').click(function () {
@@ -224,7 +241,7 @@
                 bTest10 = this.checked;
             });
 
-            $('#ckShuffle').prop("checked", bShuffle);
+           $('#ckShuffle').prop("checked", bShuffle);
             $('#ckShuffle').click(function () {
                 $("#ckShuffle").toggle(this.checked);
                 bShuffle = this.checked;
@@ -255,7 +272,7 @@
                 </div>
                 <div id="SummationSet" class="gameRunCtl" style="text-align: right; font-family: 'Noto Sans', sans-serif; font-size: 45vh; margin-bottom: 8px; margin-right:3px;">
                     <span id="TopAddend" style="line-height:0.75;">&nbsp;</span><br />
-                    <span id="OperationSymbol"></span><span id="BottomAddend" style="line-height:0.75;">&nbsp;</span>
+                    <span id="OperationSymbol" style="font-size: 33vw; text-align: left;"></span><span id="BottomAddend" style="line-height:0.75;">&nbsp;</span>
                 </div>
                 <div id="SetCounter" class="gameRunCtl" style="position:absolute; float:left; bottom:10vh; left:0; opacity:0.2;">
                     0/um
@@ -289,6 +306,8 @@
                 <label for="ckMultiply8">Multiply by 8</label><input type="checkbox" id="ckMultiply8" />
                 <label for="ckMultiply9">Multiply by 9</label><input type="checkbox" id="ckMultiply9" />
                 <label for="ckMultiply10">Multiply by 10</label><input type="checkbox" id="ckMultiply10" />
+                <label for="ckMultiply11">Multiply by 11</label><input type="checkbox" id="ckMultiply11" />
+                <label for="ckMultiply12">Multiply by 12</label><input type="checkbox" id="ckMultiply12" />
                 <!-- <label for="ckTest6">Test #6</label><input type="checkbox" id="ckTest6" />
                 <label for="ckTest9">Test #9</label><input type="checkbox" id="ckTest9" />
                 <label for="ckTest10">Test #10</label><input type="checkbox" id="ckTest10" /> -->
