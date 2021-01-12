@@ -49,7 +49,7 @@
         var bTest9 = false;
         var bTest10 = false;
         var bShuffle = true;
-        var bTimer = false;
+        var bTimer = true;
         var iTimer = 60;
 
         var a0 = [0];
@@ -96,7 +96,7 @@
                 DisplayNextProblem();
             });
 
-            //StartTimer();
+            StartTimer();
             DisplayNextProblem();
         }
 
@@ -117,12 +117,14 @@
         }
 
         function StartTimer() {
-            if (bTimer)
+            clearTimeout(hTimeout);
+            if (bTimer){
                 hTimeout = setTimeout(function () {
                     $.mobile.navigate("#results", { info: "info about the #bar hash" });
-                    $('#ResultMsg').text("You named " + iCorrectAnswers + " letters in " + iTimer + " seconds!");
+                    $('#ResultMsg').text("You answered " + iCorrectAnswers + " problems in " + iTimer + " seconds!");
                 },
                 iTimer * 1000);
+            }
         }
 
         function LoadOptions() {
@@ -274,9 +276,9 @@
                 <!-- loop start -->
                 <!-- <label ng-repeat-start="s in ProblemSets" for="ck{{s.shortname}}">{{s.displayname}}</label><input ng-repeat-end type="checkbox" id="ck{{s.shortname}}" /> -->
                 <!-- loop end -->
-                <label for="ckSumsOfTen">Sums of 10</label><input type="checkbox" id="ckSumsOfTen" />
+                <!-- <label for="ckSumsOfTen">Sums of 10</label><input type="checkbox" id="ckSumsOfTen" />
                 <label for="ckSumsOf10Subtract">Subtract Sums of 10</label><input type="checkbox" id="ckSumsOf10Subtract" />
-                <label for="ckDoubles">Doubles 0-9</label><input type="checkbox" id="ckDoubles" />
+                <label for="ckDoubles">Doubles 0-9</label><input type="checkbox" id="ckDoubles" /> -->
                 <label for="ckMultiply1">Multiply by 1</label><input type="checkbox" id="ckMultiply1" />
                 <label for="ckMultiply2">Multiply by 2</label><input type="checkbox" id="ckMultiply2" />
                 <label for="ckMultiply3">Multiply by 3</label><input type="checkbox" id="ckMultiply3" />
@@ -309,7 +311,7 @@
 
         <div role="main" class="ui-content">
             <div style="text-align:center;">
-                <h3>Great job! <div style="display:block;" id="ResultMsg">You Named a lot of Letters!</div></h3>
+                <h3 id="ResultMsg">You solved a lot of problems!</h3>
             </div>
         </div><!-- /content -->
     </div><!-- /page -->
